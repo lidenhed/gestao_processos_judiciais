@@ -1,10 +1,9 @@
 from abc import ABC, abstractmethod
 class Usuario(ABC):
-    def __init__(self, nome: str, cpf: str, login: str, senha: str, logado: bool = False):
+    def __init__(self, nome: str, cpf: str, senha: str, logado: bool = False):
         
         self.__nome = nome
         self.__cpf = cpf
-        self.__login = login
         self.__senha = senha
         self.__logado = logado
 

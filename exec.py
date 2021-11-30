@@ -1,6 +1,6 @@
 import PySimpleGUI as psg
 from enum import Enum
-
+from controllers.execucao import ControladorSistema
 class Modulo(Enum):
     JUIZ = 1
     ADVOGADO = 2
@@ -46,12 +46,12 @@ if __name__ == "__main__":
             if values[0]:
                 Execucao(Modulo.JUIZ)
                 tela_inicio_sistema.Close()
-                ##ControleExecucao().inicia_modulo_juiz()
+                ControladorSistema().init_module_juiz()
             elif values[1]:
                 Execucao(Modulo.ADVOGADO)
                 tela_inicio_sistema.Close()
-                ##ControleExecucao().inicia_modulo_advogado()
+                ##ControladorSistema().inicia_modulo_advogado()
             else:
                 Execucao(Modulo.ADVOGADO)
                 tela_inicio_sistema.Close()
-                ##ControleExecucao().inicia_modulo_parte()
+                ##ControladorSistema().inicia_modulo_parte()

@@ -50,8 +50,8 @@ if __name__ == "__main__":
             elif values[1]:
                 Execucao(Modulo.ADVOGADO)
                 tela_inicio_sistema.Close()
-                ##ControladorSistema().inicia_modulo_advogado()
+                ##ControladorSistema().inicia_module_advogado()
             else:
-                Execucao(Modulo.ADVOGADO)
+                Execucao(Modulo.PARTE)
                 tela_inicio_sistema.Close()
-                ##ControladorSistema().inicia_modulo_parte()
+                ControladorSistema().init_module_parte()

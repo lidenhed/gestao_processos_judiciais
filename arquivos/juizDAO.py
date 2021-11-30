@@ -21,8 +21,8 @@ class JuizDAO:
         if (isinstance(nome, str) and
                 isinstance(cpf, str) and
                 isinstance(senha, str)):
-            novo_admin = Juiz(nome, cpf, senha, logado)
-            self.object_cache[novo_admin.cpf] = novo_admin
+            novo_juiz = Juiz(nome, cpf, senha, logado)
+            self.object_cache[novo_juiz.cpf] = novo_juiz
             self.__dump()
             return True
         return False

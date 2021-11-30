@@ -22,14 +22,6 @@ class Usuario(ABC):
     @cpf.setter
     def cpf(self, cpf: str):
         self.__cpf = cpf
-        
-    @property
-    def login(self):
-        return self.__login
-
-    @login.setter
-    def login(self, login: str):
-        self.__login = login
 
     @property
     def senha(self):

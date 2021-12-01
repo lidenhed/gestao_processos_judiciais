@@ -1,15 +1,19 @@
 import PySimpleGUI as psg
 from enum import Enum
 from controllers.execucao import ControladorSistema
+
+
 class Modulo(Enum):
     JUIZ = 1
     ADVOGADO = 2
     PARTE = 3
-    
+
+
 class Execucao:
     def __init__(self, modulo):
         self.__modulo = modulo
-        
+
+
 psg.theme('Reddit')
 layout = [[psg.Text('Carregando...', font='ANY 13', pad=(100, 10))],
           [psg.Button('Cancelar')]]
@@ -37,7 +41,8 @@ if __name__ == "__main__":
              psg.Radio('Parte    ', "RADIO", size=(10, 1))],
             [psg.Button('Enviar'), psg.Button('Sair')]
         ]
-        tela_inicio_sistema = psg.Window('Iniciar Modulo').Layout(layout_inicia_sistema)
+        tela_inicio_sistema = psg.Window(
+            'Iniciar Modulo').Layout(layout_inicia_sistema)
         event, values = tela_inicio_sistema.read()
         if event == psg.WIN_CLOSED or event == 'Sair':
             tela_inicio_sistema.Close()
@@ -50,7 +55,7 @@ if __name__ == "__main__":
             elif values[1]:
                 Execucao(Modulo.ADVOGADO)
                 tela_inicio_sistema.Close()
-                ##ControladorSistema().inicia_module_advogado()
+                # ControladorSistema().inicia_module_advogado()
             else:
                 Execucao(Modulo.PARTE)
                 tela_inicio_sistema.Close()

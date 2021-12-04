@@ -35,7 +35,7 @@ if __name__ == "__main__":
         exit(2)
     while True:
         layout_inicia_sistema = [
-            [psg.Text('Efetuar Login como:')],
+            [psg.Text('Cadastrar-se como:')],
             [psg.Radio('Juiz     ', "RADIO", size=(10, 1)),
              psg.Radio('Advogado    ', "RADIO", size=(10, 1)),
              psg.Radio('Parte    ', "RADIO", size=(10, 1))],

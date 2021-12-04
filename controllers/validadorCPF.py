@@ -6,22 +6,21 @@ class ValidadorCPF:
     def __init__(self):
         self.__tela_validador = InterfaceValidadorCPF(self)
 
-    def valida_cpf(self, cpf):
-        try:
-            if len(cpf) < 11:
-                return False
+    def valida_cpf(self, numbers):
+        cpf = [int(char) for char in numbers if char.isdigit()]
 
-            if cpf in [s * 11 for s in [str(n) for n in range(10)]]:
-                return False
-
-            calc = lambda t: int(t[1]) * (t[0] + 2)
-            d1 = (sum(map(calc, enumerate(reversed(cpf[:-2])))) * 10) % 11
-            d2 = (sum(map(calc, enumerate(reversed(cpf[:-1])))) * 10) % 11
-            return str(d1) == cpf[-2] and str(d2) == cpf[-1]
-        except TypeError:
-            pass
-        except ValueError:
+        if len(cpf) != 11:
             return False
+
+        if cpf == cpf[::-1]:
+            return False
+
+        for i in range(9, 11):
+            value = sum((cpf[num] * ((i+1) - num) for num in range(0, i)))
+            digit = ((value * 10) % 11) % 10
+            if digit != cpf[i]:
+                return False
+        return True
 
     def solicita_cpf_cadastro(self):
         while True:

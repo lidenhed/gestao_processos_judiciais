@@ -1,13 +1,13 @@
 from controllers.juiz import JuizController
 from controllers.parte import ParteController
-##from controllers.advogado import AdvogadoController
+from controllers.Advogado import AdvogadoController
 from interface.execucao import InterfaceSistema
 
 class ControladorSistema:
     def __init__(self):
         self.__juiz_controler = JuizController(self)
         self.__parte_controller = ParteController(self)
-        ##self.__advogado_controller = AdvogadoController(self)
+        self.__advogado_controller = AdvogadoController(self)
         self.__interface_sistema = InterfaceSistema(self)
 
     @property
@@ -28,8 +28,8 @@ class ControladorSistema:
     def init_module_parte(self):
         self.__parte_controller.cadastrar_parte()
 
-    ##def init_module_advogado(self):
-        ##self.__advogado_controller.cadastrar_advogado()
+    def init_module_advogado(self):
+        self.__advogado_controller.cadastrar_Advogado()
 
     def login(self):
         while True:

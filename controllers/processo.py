@@ -13,7 +13,7 @@ class ProcessoController:
         return False
 
     def verifica_cadastro_completo(self, values):
-        if values['anexos'] == '' or values['autor'] == '' or values['codOAB_advogado_autor'] == '' or values['eh_sigiloso'] == '' or values['reu'] == '' or:
+        if values['anexos'] == '' or values['autor'] == '' or values['codOAB_advogado_autor'] == '' or values['eh_sigiloso'] == '' or values['reu'] == '':
             self.__interface_processo.close_tela_principal()
             return False
         return True

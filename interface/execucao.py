@@ -90,7 +90,7 @@ class InterfaceSistema:
                 elif values[1]:
                     Execucao(Modulo.ADVOGADO)
                     tela_inicio_sistema.Close()
-                    # self.__controlador.inicia_module_advogado()
+                    self.__controlador.init_module_advogado()
                 else:
                     Execucao(Modulo.PARTE)
                     tela_inicio_sistema.Close()

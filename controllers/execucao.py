@@ -6,41 +6,41 @@ from interface.execucao import InterfaceSistema
 
 class ControladorSistema:
     def __init__(self):
-        self.__juiz_controller = JuizController(self)
-        self.__parte_controller = ParteController(self)
-        self.__advogado_controller = AdvogadoController(self)
+        self.__controlador_juiz = JuizController(self)
+        self.__controlador_parte = ParteController(self)
+        self.__controlador_advogado = AdvogadoController(self)
         self.__interface_sistema = InterfaceSistema(self)
-        self.__processo_controller = ProcessoController(self)
+        self.__controlador_processo = ProcessoController(self)
 
     def juiz_controller(self):
         return self.__controlador_juiz
 
     def parte_controller(self):
-        return self.__parte_controller
+        return self.__controlador_parte
 
     def advogado_controller(self):
-        return self.__advogado_controller
+        return self.__controlador_advogado
     
     def processo_controller(self):
-        return self.__processo_controller
+        return self.__controlador_processo
     
     def init_module_juiz(self):
         self.__controlador_juiz.cadastrar_juiz()
 
     def init_module_parte(self):
-        self.__parte_controller.cadastrar_parte()
+        self.__controlador_parte.cadastrar_parte()
 
     def init_module_advogado(self):
-        self.__advogado_controller.cadastrar_Advogado()
+        self.__controlador_advogado.cadastrar_Advogado()
         
     def init_module_cadastrar_processo(self):
-        self.__processo_controller.cadastrar_processo()
+        self.__controlador_processo.cadastrar_processo()
         
     def init_module_efetuar_ato_processual(self):
-        self.__processo_controller.realizar_ato_processual()
+        self.__controlador_processo.realizar_ato_processual()
         
     def init_module_despachar(self):
-        self.__processo_controller.despachar()
+        self.__controlador_processo.despachar()
 
     def login(self):
         while True:

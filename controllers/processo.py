@@ -25,7 +25,7 @@ class ProcessoController:
                 juiz_controller = self.__controlador_execucao.juiz_controller()
                 advogado_controlador = self.__controlador_execucao.advogado_controller()
                 parte_controlador = self.__controlador_execucao.parte_controller()
-                validador_cpf = self.__controlador_execucao.validadorCPF()
+                validador_cpf = ValidadorCPF()
                 cod_OAB = valores[0]
                 cpf_autor = valores[1]
                 eh_sigiloso = valores[2]

@@ -1,6 +1,6 @@
 class Processo:
 
-    def __init__(self,codOAB_advogado_autor: int, autor: str, data: str, eh_sigiloso: bool,  id_processo: int, reu: str,  juiz: int, anexos: str):
+    def __init__(self,codOAB_advogado_autor: int, autor: str, eh_sigiloso: bool,  id_processo: int, reu: str,  juiz: int, anexos: str):
         
         self.__anexos = []
         self.__autor = autor

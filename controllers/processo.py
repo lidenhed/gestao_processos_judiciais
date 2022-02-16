@@ -1,6 +1,8 @@
 from interface.processo import InterfaceProcesso
 from arquivos.processoDAO import ProcessoDAO
 from controllers.validadorCPF import ValidadorCPF
+from datetime import date
+import numpy as np
 
 class ProcessoController:
 
@@ -8,6 +10,8 @@ class ProcessoController:
         self.__interface_processo = InterfaceProcesso(self)
         self.__processo_dao = ProcessoDAO()
         self.__controlador_execucao = controlador_execucao
+        self.__np_array_de_urgencia = np.array([])
+        self.__np_array_de_sigilo = np.array([])
         
 
     def cadastrar_processo(self):
@@ -58,7 +62,7 @@ class ProcessoController:
                 
                 if arquivo_anexado:
                     id_processo = self.atribui_id()
-                    self.solicita_sigilo(eh_sigiloso)
+                    self.solicita_sigilo(eh_sigiloso, id_processo)
                     id_juiz = juiz_controller.sortear_juiz()
                     sucesso_add = self.__processo_dao.add(cod_OAB, cpf_autor, eh_sigiloso, cpf_reu, anexo, id_juiz, id_processo)
                     if sucesso_add:
@@ -75,13 +79,17 @@ class ProcessoController:
     def atribui_id(self):
         return 'oi'
         
-    def realizar_ato_processual(self): ##colocar id processo no parametro
+    def realizar_ato_processual(self, id_processo): ##colocar id processo no parametro
         while True:
             valores = self.__interface_processo.tela_realizar_ato()
+            eh_urgente = valores[0]
             nome_anexo= valores[1]
             arquivo_anexado = self.verifica_anexo(nome_anexo)
             if arquivo_anexado:
-                
+                data = date.today()
+                self.salvar_data(data, id_processo)
+                self.solicita_urgencia(eh_urgente, id_processo)
+                self.salvar_anexo(nome_anexo, id_processo)
             
             break
     
@@ -101,4 +109,27 @@ class ProcessoController:
             return False
         return True
     
-    def salvar_data(data)
+    def salvar_data(self, data, id_processo):
+        self.__processo_dao.add_data(data, id_processo)
+        
+    def salvar_anexo(self, data, id_processo):
+        self.__processo_dao.add_anexo(data, id_processo)
+
+    def solicita_urgencia(self, eh_urgente, id_processo):
+        self.__processo_dao.set_urgencia(eh_urgente, id_processo)
+        if self.__np_array_de_urgencia == []:
+            np.savetxt('listaDeUrgencia.txt', self.__np_array_de_urgencia, fmt='%d')
+        else:
+            var = np.loadtxt('listaDeUrgencia.txt', dtype=int)
+            var.append(id_processo)
+            np.savetxt('listaDeUrgencia.txt', var, fmt='%d')
+
+    def solicita_sigilo(self, eh_sigiloso, id_processo):
+        self.__processo_dao.set_sigilo(eh_sigiloso)
+        if self.__np_array_de_sigilo == []:
+            np.savetxt('listaDeSigilo.txt', self.__np_array_de_sigilo, fmt='%d')
+        else:
+            var = np.loadtxt('listaDeSigilo.txt', dtype=int)
+            var.append(id_processo)
+            np.savetxt('listaDeSigilo.txt', var, fmt='%d')
+

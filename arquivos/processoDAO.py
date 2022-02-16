@@ -1,5 +1,6 @@
 import pickle
 from entities.processo import Processo
+from datetime import date
 
 class ProcessoDAO:
 
@@ -25,8 +26,10 @@ class ProcessoDAO:
                 isinstance(id_processo, int) and
                 isinstance(id_juiz, int) and
                 isinstance(cpf_reu, str)):
-            data = 'metodoquepegadataaqui'
-            novo_processo = Processo(cod_OAB, cpf_autor, data, eh_sigiloso, id_processo, cpf_reu, id_juiz, anexos)
+            data = date.today()
+            novo_processo = Processo(cod_OAB, cpf_autor, eh_sigiloso, id_processo, cpf_reu, id_juiz)
+            novo_processo.data.setter(data)
+            novo_processo.anexos.setter(anexo)
             self.object_cache[novo_processo.id_processo] = novo_processo
             self.__dump()
             return True
@@ -51,14 +54,17 @@ class ProcessoDAO:
     def get_all(self):
         return self.object_cache.values()
 
-    def add_anexo(self):
-        return False
+    def add_anexo(self, anexo, id_processo):
+        processo = self.get(id_processo)
+        processo.anexos.setter(anexo)
 
-    def add_data(self):
-        return False
+    def add_data(self, data, id_processo):
+        processo = self.get(id_processo)
+        processo.data.setter(data)
 
-    def set_urgencia(self):
-        return False
+    def set_urgencia(self, eh_urgente, id_processo):
+        processo = self.get(id_processo)
+        processo.eh_urgente.setter(eh_urgente)
 
 
 

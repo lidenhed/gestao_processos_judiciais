@@ -2,6 +2,7 @@ from interface.juiz import InterfaceJuiz
 from arquivos.juizDAO import JuizDAO
 from controllers.validadorCPF import ValidadorCPF
 import hashlib
+import random
 
 
 class JuizController:
@@ -48,7 +49,11 @@ class JuizController:
             break
         
     def sortear_juiz(self):
-        self.__juiz_dao.get_all()
+        lista_juizes = self.__juiz_dao.get_all()
+        lista_cpf = []
+        for juiz in lista_juizes:
+            lista_cpf.append(juiz.cpf)
+        return random.choice(lista_cpf)
 
     def verifica_matricula_jah_existente(self, cpf):
         verificacao = self.__juiz_dao.get(cpf)

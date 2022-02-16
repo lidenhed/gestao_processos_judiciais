@@ -70,10 +70,14 @@ class ProcessoController:
         return 'oi'
         
     def realizar_ato_processual(self): ##colocar id processo no parametro
-        valores = self.__interface_processo.tela_realizar_ato()
-        
-        arquivo_anexado = self.verifica_anexo(nome_anexo)
-        return False
+        while True:
+            valores = self.__interface_processo.tela_realizar_ato()
+            nome_anexo= valores[1]
+            arquivo_anexado = self.verifica_anexo(nome_anexo)
+            if arquivo_anexado:
+                
+            
+            break
     
     def despachar(self, id_processo):
         return False
@@ -90,3 +94,5 @@ class ProcessoController:
             self.__interface_processo.close_tela_principal()
             return False
         return True
+    
+    def salvar_data(data)

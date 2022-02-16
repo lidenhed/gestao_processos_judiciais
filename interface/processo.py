@@ -16,7 +16,8 @@ class InterfaceProcesso:
                 [psg.Radio('Sim:     ',"RADIO", size=(10, 1)),
                 psg.Radio('Não:     ',"RADIO", size=(10, 1))],
                 [psg.Text('CPF do réu:', size=(20, 1)), psg.InputText('', key='reu')],
-                [psg.Text('Anexe aqui seu arquivo:', size=(20, 1)), psg.Button('Anexar')],
+                [psg.Text('Anexe aqui seu arquivo:', size=(20, 1))],
+                [psg.Input(key='-IN-'), psg.FileBrowse()],
                 [psg.Button('Cadastrar'), psg.Button('Voltar')]
             ]
             tela_cadastro = psg.Window('Cadastrar Processo').Layout(layout_cadastro)

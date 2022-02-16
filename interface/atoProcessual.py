@@ -12,7 +12,8 @@ class InterfaceAtoProcessual:
                 [psg.Text('Preencha os campos abaixo:', size=(30, 1))],
                 [psg.Text('', size=(30, 1))],
                 [psg.Checkbox('Solicitar urgência:     ',"CHECKBOX", size=(30, 1))],
-                [psg.Text('Anexe aqui seu arquivo:', size=(30, 1)), psg.Button('Anexar')],
+                [psg.Text('Anexe aqui seu arquivo:', size=(30, 1))],
+                [psg.Input(psg.user_settings_get_entry('-filename-', ''), key='-IN-'), psg.FileBrowse()],
                 [psg.Button('Enviar'), psg.Button('Voltar')]
             ]
             tela_realizar_ato = psg.Window('Tela Realizar Ato').Layout(layout_ato_processual)

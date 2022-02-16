@@ -1,3 +1,4 @@
+from interface.atoProcessual import InterfaceAtoProcessual
 from interface.processo import InterfaceProcesso
 from arquivos.processoDAO import ProcessoDAO
 from controllers.validadorCPF import ValidadorCPF
@@ -8,6 +9,7 @@ class ProcessoController:
 
     def __init__(self, controlador_execucao):
         self.__interface_processo = InterfaceProcesso(self)
+        self.__interface_ato_processual = InterfaceAtoProcessual(self)
         self.__processo_dao = ProcessoDAO()
         self.__controlador_execucao = controlador_execucao
         self.__np_array_de_urgencia = np.array([])
@@ -79,9 +81,9 @@ class ProcessoController:
     def atribui_id(self):
         return 'oi'
         
-    def realizar_ato_processual(self, id_processo): ##colocar id processo no parametro
+    def realizar_ato_processual(self): ##colocar id processo no parametro
         while True:
-            valores = self.__interface_processo.tela_realizar_ato()
+            valores = self.__interface_ato_processual.tela_realizar_ato()
             eh_urgente = valores[0]
             nome_anexo= valores[1]
             arquivo_anexado = self.verifica_anexo(nome_anexo)

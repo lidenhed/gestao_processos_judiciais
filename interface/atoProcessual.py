@@ -7,6 +7,8 @@ class InterfaceAtoProcessual:
         self.__window = None
             
     def tela_realizar_ato(self):
+        settings = psg.UserSettings()
+        psg.user_settings_filename(path='.')
         while True:
             layout_ato_processual = [
                 [psg.Text('Preencha os campos abaixo:', size=(30, 1))],
@@ -22,6 +24,7 @@ class InterfaceAtoProcessual:
             if event == 'Voltar' or event == psg.WIN_CLOSED:
                 break
             else:
+                settings['-filename-'] = values['-IN-']
                 return values
                 
     def aviso(self, msg):

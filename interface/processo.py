@@ -7,6 +7,8 @@ class InterfaceProcesso:
         self.__window = None
 
     def tela_cadastrar_processo(self):
+        settings = psg.UserSettings()
+        psg.user_settings_filename(path='.')
         while True:
             layout_cadastro = [
                 [psg.Text('Preencha os campos abaixo:')],
@@ -26,6 +28,7 @@ class InterfaceProcesso:
             if event == 'Voltar' or event == psg.WIN_CLOSED:
                 break
             else:
+                settings['-filename-'] = values['-IN-']
                 return values
                 
     def aviso(self, msg):

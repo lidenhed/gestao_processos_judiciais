@@ -56,15 +56,19 @@ class ProcessoDAO:
 
     def add_anexo(self, anexo, id_processo):
         processo = self.get(id_processo)
-        processo.anexos.setter(anexo)
+        processo.anexos(anexo)
 
     def add_data(self, data, id_processo):
         processo = self.get(id_processo)
-        processo.data.setter(data)
+        processo.data(data)
 
     def set_urgencia(self, eh_urgente, id_processo):
         processo = self.get(id_processo)
-        processo.eh_urgente.setter(eh_urgente)
+        processo.eh_urgente(eh_urgente)
+        
+    def set_sigilo(self, eh_sigiloso, id_processo):
+        processo = self.get(id_processo)
+        processo.eh_sigiloso(eh_sigiloso)
 
 
 

@@ -14,6 +14,7 @@ class ProcessoController:
         self.__controlador_execucao = controlador_execucao
         self.__np_array_de_urgencia = np.array([])
         self.__np_array_de_sigilo = np.array([])
+        self.__np_array_de_processos = np.array([])
         
 
     def cadastrar_processo(self):
@@ -29,6 +30,7 @@ class ProcessoController:
                 cod_OAB = valores['codOAB_advogado_autor']
                 cpf_autor = valores['autor']
                 eh_sigiloso = valores['eh_sigiloso']
+                print(valores)
                 cpf_reu = valores['reu']
                 anexo = valores['-IN-']
                 advogado_encontrado = False
@@ -53,7 +55,7 @@ class ProcessoController:
                 if cpf_encontrado_autor:
                     cpf_valido_reu = validador_cpf.valida_cpf(cpf_reu)
                 else:
-                    self.__interface_processo.aviso('CPF não cadastrado')
+                    self.__interface_processo.aviso('CPF do autor não cadastrado')
                     continue
                 
                 if cpf_valido_reu:
@@ -79,7 +81,11 @@ class ProcessoController:
             break
     
     def atribui_id(self):
-        return 'oi'
+        lista_processo = self.__processo_dao.get_all()
+        id_processo = len(lista_processo) + 1
+        return id_processo
+        
+        
         
     def realizar_ato_processual(self): ##colocar id processo no parametro
         while True:
@@ -101,7 +107,7 @@ class ProcessoController:
     def verifica_anexo(self, nome_anexo):
         if nome_anexo == '':
             return False
-        if nome_anexo.split('.') == Null:
+        if nome_anexo.split('.') == None:
             return False
         return True
         
@@ -127,7 +133,9 @@ class ProcessoController:
             np.savetxt('listaDeUrgencia.txt', var, fmt='%d')
 
     def solicita_sigilo(self, eh_sigiloso, id_processo):
-        self.__processo_dao.set_sigilo(eh_sigiloso)
+        print(eh_sigiloso)
+        print(id_processo)
+        self.__processo_dao.set_sigilo(eh_sigiloso, id_processo)
         if self.__np_array_de_sigilo == []:
             np.savetxt('listaDeSigilo.txt', self.__np_array_de_sigilo, fmt='%d')
         else:

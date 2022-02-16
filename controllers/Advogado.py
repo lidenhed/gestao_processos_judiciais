@@ -67,10 +67,12 @@ class AdvogadoController:
         self.__interface_Advogado.mostrar_lista(dic_nome_num_Advogados)
 
     def verifica_cpf_jah_existente(self, cpf):
-        verificacao = self.__Advogado_dao.get(cpf)
-        if verificacao is None:
-            return False
-        return True
+        advogados = self.__Advogado_dao.get_all()
+        print(advogados)
+        for advogado in advogados:
+            if advogado.cpf == cpf:
+                return True
+        return False
 
     def get_nome_Advogado_by_cpf(self, cpf: str):
         advogado = self.__Advogado_dao.get(cpf)

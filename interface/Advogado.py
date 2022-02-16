@@ -12,7 +12,7 @@ class InterfaceAdvogado:
             layout_cadastro = [
                 [psg.Text('Preencha os dados abaixo:')],
                 [psg.Text('Nome:', size=(20, 1)), psg.InputText('', key='nome')],
-                [psg.Text('Advogado Padrão:', size=(20, 1)), psg.InputText('', key='advogado')],
+                [psg.Text('Código OAB:', size=(20, 1)), psg.InputText('', key='cod_OAB')],
                 [psg.Text(f'Login:                                  {cpf}')],
                 [psg.Text('Senha:', size=(20, 1)), psg.InputText('', key='password', password_char='*')],
                 [psg.Button('Enviar Dados'), psg.Button('Voltar')]

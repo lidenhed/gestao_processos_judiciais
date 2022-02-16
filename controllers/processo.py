@@ -26,11 +26,11 @@ class ProcessoController:
                 advogado_controlador = self.__controlador_execucao.advogado_controller()
                 parte_controlador = self.__controlador_execucao.parte_controller()
                 validador_cpf = ValidadorCPF()
-                cod_OAB = valores[0]
-                cpf_autor = valores[1]
-                eh_sigiloso = valores[2]
-                cpf_reu = valores[4]
-                anexo = valores[5]
+                cod_OAB = valores['codOAB_advogado_autor']
+                cpf_autor = valores['autor']
+                eh_sigiloso = valores['eh_sigiloso']
+                cpf_reu = valores['reu']
+                anexo = valores['-IN-']
                 advogado_encontrado = False
                 cpf_valido_autor = False
                 cpf_encontrado_autor = False

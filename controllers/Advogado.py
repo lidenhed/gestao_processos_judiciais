@@ -29,6 +29,11 @@ class AdvogadoController:
                 if not cadastro_ok:
                     self.__interface_Advogado.aviso('\nCampo(s) obrigatórios não preenchidos')
                     continue
+                cod_OAB = valores['cod_OAB']
+                existe_cod_OAB = self.verifica_cod_OAB(cod_OAB)            
+                if existe_cod_OAB:
+                    self.__interface_Advogado.aviso('\nAdvogado já foi cadastrado!')
+                    continue
                 senha = valores['password']
                 try:
                     senha_utf = senha.encode('utf-8')
@@ -41,7 +46,7 @@ class AdvogadoController:
                 sucesso_add = self.__Advogado_dao.add(valores['nome'],
                                                            cpf,
                                                            senha_hash,
-                                                           False)
+                                                           False, cod_OAB)
                 if not sucesso_add:
                     self.__interface_Advogado.aviso('Erro no cadastro')
                 break
@@ -71,7 +76,7 @@ class AdvogadoController:
         advogado = self.__Advogado_dao.get(cpf)
         return advogado.nome
     
-    def verificar_cod_OAB(self, cod_OAB):
+    def verifica_cod_OAB(self, cod_OAB):
         verificacao = self.__Advogado_dao.get(cod_OAB)
         if verificacao is None:
             return False

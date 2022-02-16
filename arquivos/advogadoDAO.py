@@ -17,12 +17,13 @@ class AdvogadoDAO:
     def __load(self):
         self.object_cache = pickle.load(open(self.datasource, 'rb'))
 
-    def add(self, nome, cpf, senha, logado):
+    def add(self, nome, cpf, senha, logado, cod_OAB):
         if (isinstance(nome, str) and
                 isinstance(cpf, str) and
-                isinstance(senha, str)):
-            novo_Advogado = Advogado(nome, cpf, senha, logado)
-            self.object_cache[novo_Advogado.cpf] = novo_Advogado
+                isinstance(senha, str) and
+                isinstance(cod_OAB, str)):
+            novo_Advogado = Advogado(nome, cpf, senha, logado, cod_OAB)
+            self.object_cache[novo_Advogado.cod_OAB] = novo_Advogado
             self.__dump()
             return True
         return False
@@ -30,6 +31,7 @@ class AdvogadoDAO:
     def get(self, key):
         if isinstance(key, str):
             try:
+                print(self.object_cache)
                 return self.object_cache[key]
             except KeyError:
                 return None

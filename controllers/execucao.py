@@ -6,30 +6,26 @@ from interface.execucao import InterfaceSistema
 
 class ControladorSistema:
     def __init__(self):
-        self.__juiz_controler = JuizController(self)
+        self.__juiz_controller = JuizController(self)
         self.__parte_controller = ParteController(self)
         self.__advogado_controller = AdvogadoController(self)
         self.__interface_sistema = InterfaceSistema(self)
         self.__processo_controller = ProcessoController(self)
 
-    @property
-    def juiz_controler(self):
-        return self.__juiz_controler
+    def juiz_controller(self):
+        return self.__controlador_juiz
 
-    @property
     def parte_controller(self):
         return self.__parte_controller
 
-    @property
     def advogado_controller(self):
         return self.__advogado_controller
     
-    @property
     def processo_controller(self):
         return self.__processo_controller
     
     def init_module_juiz(self):
-        self.__juiz_controler.cadastrar_juiz()
+        self.__controlador_juiz.cadastrar_juiz()
 
     def init_module_parte(self):
         self.__parte_controller.cadastrar_parte()
@@ -59,7 +55,7 @@ class ControladorSistema:
                     # elif opcao == 'Advogado':
                     #     cadastro = self.advogadoController.advogado_dao.get(usuario)
                     elif opcao == 'Juiz':
-                        cadastro = self.juiz_controler.juiz_dao.get(usuario)
+                        cadastro = self.controlador_juiz.juiz_dao.get(usuario)
                     if cadastro:
                         if senha == cadastro.senha:
                             return self.__interface_sistema.aviso('Deu certo')

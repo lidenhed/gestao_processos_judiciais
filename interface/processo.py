@@ -15,7 +15,7 @@ class InterfaceProcesso:
                 [psg.Text('OAB do Advogado Autor:', size=(20, 1)), psg.InputText('', key='codOAB_advogado_autor')],
                 [psg.Text('CPF do Autor:', size=(20, 1)), psg.InputText('', key='autor')],
                 [psg.Text('Solicitar Sigilo:')],
-                [psg.Radio('Sim:     ',"RADIO", size=(10, 1)),
+                [psg.Radio('Sim:     ',"RADIO", size=(10, 1), key='eh_sigiloso'),
                 psg.Radio('Não:     ',"RADIO", size=(10, 1))],
                 [psg.Text('CPF do réu:', size=(20, 1)), psg.InputText('', key='reu')],
                 [psg.Text('Anexe aqui seu arquivo:', size=(20, 1))],

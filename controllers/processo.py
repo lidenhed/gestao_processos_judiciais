@@ -22,9 +22,9 @@ class ProcessoController:
             cadastro_ok = self.verifica_cadastro_completo(valores)
             
             if cadastro_ok:
-                parte_controller = self.__controlador_execucao.parte_controller()
-                advogado_controller = self.__controlador_execucao.advogado_controller()
                 juiz_controller = self.__controlador_execucao.juiz_controller()
+                advogado_controlador = self.__controlador_execucao.advogado_controller()
+                parte_controlador = self.__controlador_execucao.parte_controller()
                 validador_cpf = self.__controlador_execucao.validadorCPF()
                 cod_OAB = valores[0]
                 cpf_autor = valores[1]
@@ -37,7 +37,7 @@ class ProcessoController:
                 cpf_valido_reu = False
                 arquivo_anexado = False
 
-                advogado_encontrado = advogado_controller.verifica_cod_OAB(cod_OAB)
+                advogado_encontrado = advogado_controlador.verifica_cod_OAB(cod_OAB)
                 if advogado_encontrado:
                     cpf_valido_autor = validador_cpf.valida_cpf(cpf_autor)
                 else:
@@ -45,7 +45,7 @@ class ProcessoController:
                     continue
                 
                 if cpf_valido_autor:
-                    cpf_encontrado_autor = parte_controller.verifica_cpf_jah_existente(cpf_autor)
+                    cpf_encontrado_autor = parte_controlador.verifica_cpf_jah_existente(cpf_autor)
                 else:
                     self.__interface_processo.aviso('CPF do autor inválido')
                     continue
@@ -106,7 +106,7 @@ class ProcessoController:
         return True
         
     def verifica_cadastro_completo(self, values):
-        if values['anexos'] == '' or values['autor'] == '' or values['codOAB_advogado_autor'] == '' or values['eh_sigiloso'] == '' or values['reu'] == '':
+        if values['-IN-'] == '' or values['autor'] == '' or values['codOAB_advogado_autor'] == '' or values['eh_sigiloso'] == '' or values['reu'] == '':
             self.__interface_processo.close_tela_principal()
             return False
         return True

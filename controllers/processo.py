@@ -60,10 +60,16 @@ class ProcessoController:
                     id_processo = self.atribui_id()
                     self.solicita_sigilo(eh_sigiloso)
                     id_juiz = juiz_controller.sortear_juiz()
-                    self.__processo_dao.add(cod_OAB, cpf_autor, eh_sigiloso, cpf_reu, anexo, id_juiz, id_processo)
+                    sucesso_add = self.__processo_dao.add(cod_OAB, cpf_autor, eh_sigiloso, cpf_reu, anexo, id_juiz, id_processo)
+                    if sucesso_add:
+                        self.__interface_processo.aviso('Processo cadastrado com sucesso')
                 else:
                     self.__interface_processo.aviso('Anexe um arquivo')
-                    continue            
+                    continue    
+            else:
+                self.__interface_processo.aviso('Campos obrigatórios não preenchidos')
+                continue
+                    
             break
     
     def atribui_id(self):

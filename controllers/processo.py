@@ -14,6 +14,7 @@ class ProcessoController:
         while True:
             valores = self.__interface_processo.tela_cadastrar_processo()
             cadastro_ok = self.verifica_cadastro_completo(valores)
+            
             if cadastro_ok:
                 parte_controller = self.__controlador_execucao.parte_controller()
                 advogado_controller = self.__controlador_execucao.advogado_controller()
@@ -24,36 +25,45 @@ class ProcessoController:
                 eh_sigiloso = valores[2]
                 cpf_reu = valores[4]
                 anexo = valores[5]
+                advogado_encontrado = False
+                cpf_valido_autor = False
+                cpf_encontrado_autor = False
+                cpf_valido_reu = False
+                arquivo_anexado = False
+
                 advogado_encontrado = advogado_controller.verifica_cod_OAB(cod_OAB)
                 if advogado_encontrado:
                     cpf_valido_autor = validador_cpf.valida_cpf(cpf_autor)
-                    if cpf_valido_autor:
-                        cpf_encontrado_autor = parte_controller.verifica_cpf_jah_existente(cpf_autor)
-                        if cpf_encontrado_autor:
-                            cpf_valido_reu = validador_cpf.valida_cpf(cpf_reu)
-                            if cpf_valido_reu:
-                                arquivo_anexado = self.verifica_anexo(anexo)
-                                if arquivo_anexado:
-                                    id_processo = self.atribui_id()
-                                    self.solicita_sigilo(eh_sigiloso)
-                                    id_juiz = juiz_controller.sortear_juiz()
-                                    self.__processo_dao.add(cod_OAB, cpf_autor, eh_sigiloso, cpf_reu, anexo, id_juiz, id_processo)
-                                else:
-                                    self.__interface_processo.aviso('Anexe um arquivo')
-                                    continue
-                            else:
-                                self.__interface_processo.aviso('CPF do réu inválido')
-                                continue
-                        else:
-                            self.__interface_processo.aviso('CPF não cadastrado')
-                            continue
-                                    
-                    else:
-                        self.__interface_processo.aviso('CPF do autor inválido')
-                        continue
                 else:
                     self.__interface_processo.aviso('Advogado não encontrado')
-                    continue                  
+                    continue
+                
+                if cpf_valido_autor:
+                    cpf_encontrado_autor = parte_controller.verifica_cpf_jah_existente(cpf_autor)
+                else:
+                    self.__interface_processo.aviso('CPF do autor inválido')
+                    continue
+                
+                if cpf_encontrado_autor:
+                    cpf_valido_reu = validador_cpf.valida_cpf(cpf_reu)
+                else:
+                    self.__interface_processo.aviso('CPF não cadastrado')
+                    continue
+                
+                if cpf_valido_reu:
+                    arquivo_anexado = self.verifica_anexo(anexo)
+                else:
+                    self.__interface_processo.aviso('CPF do réu inválido')
+                    continue
+                
+                if arquivo_anexado:
+                    id_processo = self.atribui_id()
+                    self.solicita_sigilo(eh_sigiloso)
+                    id_juiz = juiz_controller.sortear_juiz()
+                    self.__processo_dao.add(cod_OAB, cpf_autor, eh_sigiloso, cpf_reu, anexo, id_juiz, id_processo)
+                else:
+                    self.__interface_processo.aviso('Anexe um arquivo')
+                    continue            
             break
     
     def atribui_id(self):

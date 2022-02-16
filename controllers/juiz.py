@@ -46,7 +46,16 @@ class JuizController:
                     self.__interface_juiz.aviso('Erro no cadastro')
                 break
             break
+        
+    def sortear_juiz(self):
+        self.__juiz_dao.get_all()
 
+    def verifica_matricula_jah_existente(self, cpf):
+        verificacao = self.__juiz_dao.get(cpf)
+        if verificacao is None:
+            return False
+        return True
+    
     def verifica_cadastro_completo(self, values):
         if values['nome'] == '' or values['password'] == '':
             self.__interface_juiz.close_tela_principal()
@@ -61,11 +70,6 @@ class JuizController:
             dic_nome_num_juizes[juiz.nome] = juiz.cpf
         self.__interface_juiz.mostrar_lista(dic_nome_num_juizes)
 
-    def verifica_cpf_jah_existente(self, cpf):
-        verificacao = self.__juiz_dao.get(cpf)
-        if verificacao is None:
-            return False
-        return True
 
     def get_nome_juiz_by_cpf(self, cpf: str):
         juiz = self.__juiz_dao.get(cpf)

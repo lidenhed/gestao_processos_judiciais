@@ -17,16 +17,16 @@ class ProcessoDAO:
     def __load(self):
         self.object_cache = pickle.load(open(self.datasource, 'rb'))
 
-    def add(self, anexos, autor, codOAB_advogado_autor, data, eh_sigiloso, id_processo, juiz, reu):
-        if (isinstance(anexos, str) and
-                isinstance(autor, str) and
-                isinstance(codOAB_advogado_autor, int) and
-                isinstance(data, str) and
+    def add(cod_OAB, cpf_autor, eh_sigiloso, cpf_reu, anexo, id_juiz, id_processo):
+        if (isinstance(anexo, str) and
+                isinstance(cpf_autor, str) and
+                isinstance(cod_OAB, int) and
                 isinstance(eh_sigiloso, bool) and
                 isinstance(id_processo, int) and
-                isinstance(juiz, int) and
-                isinstance(reu, str)):
-            novo_processo = Processo(anexos, codOAB_advogado_autor, data, eh_sigiloso, id_processo, juiz, reu)
+                isinstance(id_juiz, int) and
+                isinstance(cpf_reu, str)):
+            data = 'metodoquepegadataaqui'
+            novo_processo = Processo(cod_OAB, cpf_autor, data, eh_sigiloso, id_processo, cpf_reu, id_juiz, anexos)
             self.object_cache[novo_processo.id_processo] = novo_processo
             self.__dump()
             return True

@@ -70,3 +70,9 @@ class AdvogadoController:
     def get_nome_Advogado_by_cpf(self, cpf: str):
         advogado = self.__Advogado_dao.get(cpf)
         return advogado.nome
+    
+    def verificar_cod_OAB(self, cod_OAB):
+        verificacao = self.__Advogado_dao.get(cod_OAB)
+        if verificacao is None:
+            return False
+        return True

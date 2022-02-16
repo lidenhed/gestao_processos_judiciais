@@ -1,6 +1,7 @@
 from controllers.juiz import JuizController
 from controllers.parte import ParteController
 from controllers.Advogado import AdvogadoController
+from controllers.processo import ProcessoController
 from interface.execucao import InterfaceSistema
 
 class ControladorSistema:
@@ -9,6 +10,7 @@ class ControladorSistema:
         self.__parte_controller = ParteController(self)
         self.__advogado_controller = AdvogadoController(self)
         self.__interface_sistema = InterfaceSistema(self)
+        self.__processo_controller = ProcessoController(self)
 
     @property
     def juiz_controler(self):
@@ -22,6 +24,10 @@ class ControladorSistema:
     def advogado_controller(self):
         return self.__advogado_controller
     
+    @property
+    def processo_controller(self):
+        return self.__processo_controller
+    
     def init_module_juiz(self):
         self.__juiz_controler.cadastrar_juiz()
 
@@ -30,6 +36,15 @@ class ControladorSistema:
 
     def init_module_advogado(self):
         self.__advogado_controller.cadastrar_Advogado()
+        
+    def init_module_cadastrar_processo(self):
+        self.__processo_controller.cadastrar_processo()
+        
+    def init_module_efetuar_ato_processual(self):
+        self.__processo_controller.realizar_ato_processual()
+        
+    def init_module_despachar(self):
+        self.__processo_controller.despachar()
 
     def login(self):
         while True:
